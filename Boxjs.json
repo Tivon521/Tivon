@@ -864,10 +864,8 @@
         "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory_mini.png",
         "https://raw.githubusercontent.com/58xinian/icon/master/jd_factory.png"
       ]
-    }
-  ]
-}
-{
+   },
+   {
   "id": "vinewx.app.sub",
   "name": "vinewx应用订阅",
   "author": "@vinewx",
