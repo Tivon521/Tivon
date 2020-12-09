@@ -1,15 +1,13 @@
 # File: .github/workflows/repo-sync.yml
-name: sync-lxk0301-scripts
+name: sync-Sunert-scripts
 on:
   schedule:
     - cron: '1 0,15 * * *'
   workflow_dispatch:
   watch:
     types: started
-  push:
-    branches: [ master ]
   repository_dispatch:
-    types: sync-lxk0301-scripts
+    types: sync-Sunert-scripts
 jobs:
   repo-sync:
     env:
@@ -22,11 +20,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: sync lxk0301-scripts
+      - name: sync Sunert-scripts
         uses: repo-sync/github-sync@v2
         if: env.PAT
         with:
-          source_repo: "https://github.com/lxk0301/jd_scripts.git"
+          source_repo: "https://github.com/Sunert/Scripts.git"
           source_branch: "master"
           destination_branch: "master"
           github_token: ${{ secrets.PAT }}
@@ -35,8 +33,15 @@ jobs:
         uses: Yikun/hub-mirror-action@master
         if: env.dst_key
         with:
-          src: github/lxk0301
-          dst: gitee/lxk0301
-          static_list: "jd_scripts"
+          # 必选，需要同步的Github用户（源）
+          src: github/Sunert
+          # 必选，需要同步到的Gitee的用户（目的）
+          dst: gitee/Sunert
+          # 必选，更新指定库名字
+          static_list: "Scripts"
+
+          # 必选，Gitee公钥对应的私钥，https://gitee.com/profile/sshkeys
           dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+
+          # 必选，Gitee对应的用于创建仓库的token，https://gitee.com/profile/personal_access_tokens
           dst_token: ${{ secrets.GITEE_TOKEN }}
